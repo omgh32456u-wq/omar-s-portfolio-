@@ -28,3 +28,5 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+- All personal portfolio content (name, bio, email, socials, projects, skills) lives in src/content/site.ts so non-developers edit one file.
