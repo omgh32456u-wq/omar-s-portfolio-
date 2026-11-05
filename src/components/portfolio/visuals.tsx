@@ -78,7 +78,7 @@ export function KingdomVisual() {
     <svg viewBox="0 0 320 200" className="size-full" aria-hidden="true">
       <g stroke="var(--accent)" strokeOpacity=".4" strokeDasharray="3 4">
         {edges.map(([a, b], i) => (
-          <line key={i} x1={pts[a][0]} y1={pts[a][1]} x2={pts[b][0]} y2={pts[b][1]} />
+          <line key={i} x1={pts[a]![0]} y1={pts[a]![1]} x2={pts[b]![0]} y2={pts[b]![1]} />
         ))}
       </g>
       {pts.map(([x, y, l], i) => (
