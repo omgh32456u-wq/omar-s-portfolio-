@@ -20,10 +20,26 @@ export const site = {
   ] as const,
 };
 
+// Optional: your live site address, e.g. "https://yourname.dev" (no trailing slash).
+// Leave empty until you have one — canonical links are only added when set.
+export const siteUrl = ""; // [EDIT]
+
+// ── Placeholder guards ───────────────────────────────────────
+// Values still containing the template placeholders are treated as unset,
+// so the live site never shows "Your Name" or links to fake addresses.
+const PLACEHOLDER = /your name|you@example\.com|your-username|^yn$/i;
+export const isSet = (v: string | undefined | null): v is string =>
+  !!v && v.trim() !== "" && !PLACEHOLDER.test(v);
+
+export const displayName = isSet(site.name) ? site.name : "Portfolio";
+export const displayInitials = isSet(site.initials) ? site.initials : "◆";
+export const contactEmail = isSet(site.email) ? site.email : null;
+export const activeSocials = site.socials.filter((s) => isSet(s.href));
+
 export type ProjectStatus = "In development" | "Early prototype";
 
-export const projects: {
-  id: string;
+export type Project = {
+  id: string; // also the URL: /projects/<id>
   name: string;
   status: ProjectStatus;
   kind: string;
@@ -32,7 +48,19 @@ export const projects: {
   notYet: string;
   stack: string[];
   visual: "mizano" | "kingdom";
-}[] = [
+  // Optional case-study fields — leave out until you have real content.
+  problem?: string;
+  approach?: string;
+  currentProgress?: string;
+  learnings?: string[];
+  screenshots?: { src: string; alt: string }[];
+  repoUrl?: string;
+  liveUrl?: string;
+};
+
+export const getProject = (slug: string) => projects.find((p) => p.id === slug);
+
+export const projects: Project[] = [
   {
     id: "mizano",
     name: "Mizano",
