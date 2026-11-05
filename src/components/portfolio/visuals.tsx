@@ -73,7 +73,7 @@ export function KingdomVisual() {
     [110, 170, "citizens"],
     [210, 170, "building"],
   ] as const;
-  const edges = [[0, 1], [0, 2], [1, 3], [1, 4], [2, 4], [3, 4], [1, 2]];
+  const edges: [number, number][] = [[0, 1], [0, 2], [1, 3], [1, 4], [2, 4], [3, 4], [1, 2]];
   return (
     <svg viewBox="0 0 320 200" className="size-full" aria-hidden="true">
       <g stroke="var(--accent)" strokeOpacity=".4" strokeDasharray="3 4">
