@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Menu, Moon, Sun, X } from "lucide-react";
-import { nav, site } from "@/content/site";
+import { activeSocials, displayInitials, displayName, nav } from "@/content/site";
 
 export function Reveal({ children, className = "" }: { children: ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -42,9 +42,10 @@ export function SocialIcon({ name, className = "size-5" }: { name: string; class
 }
 
 export function SocialRow() {
+  if (activeSocials.length === 0) return null;
   return (
     <ul className="flex flex-row items-center gap-2">
-      {site.socials.map((s) => (
+      {activeSocials.map((s) => (
         <li key={s.label}>
           <a
             href={s.href}
@@ -96,22 +97,34 @@ export function Header() {
     window.addEventListener("scroll", on, { passive: true });
     return () => window.removeEventListener("scroll", on);
   }, []);
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const mq = window.matchMedia("(min-width: 768px)");
+    const onMq = () => mq.matches && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    mq.addEventListener("change", onMq);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      mq.removeEventListener("change", onMq);
+    };
+  }, [open]);
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition ${scrolled || open ? "border-b bg-background/80 backdrop-blur-xl" : ""}`}
     >
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5" aria-label="Main">
-        <a href="#top" className="flex items-center gap-2 font-display font-semibold">
+        <a href="/" className="flex items-center gap-2 font-display font-semibold">
           <span className="grid size-8 place-items-center rounded-lg bg-gradient-brand text-xs text-primary-foreground">
-            {site.initials}
+            {displayInitials}
           </span>
-          <span className="hidden sm:inline">{site.name}</span>
+          <span className="hidden sm:inline">{displayName}</span>
         </a>
         <ul className="hidden items-center gap-1 md:flex">
           {nav.map((n) => (
             <li key={n.id}>
               <a
-                href={`#${n.id}`}
+                href={`/#${n.id}`}
                 className="rounded-full px-4 py-2 text-sm text-muted-foreground transition hover:bg-surface hover:text-foreground"
               >
                 {n.label}
@@ -138,7 +151,7 @@ export function Header() {
             {nav.map((n) => (
               <li key={n.id}>
                 <a
-                  href={`#${n.id}`}
+                  href={`/#${n.id}`}
                   onClick={() => setOpen(false)}
                   className="block border-b py-4 font-display text-lg"
                 >
