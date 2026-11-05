@@ -1,10 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, Mail, MapPin } from "lucide-react";
-import { projects, site, skills } from "@/content/site";
+import { contactEmail, displayName, projects, site, siteUrl, skills } from "@/content/site";
 import { Header, Reveal, SectionHeading, SocialRow } from "@/components/portfolio/parts";
 import { HeroDiagram, KingdomVisual, MizanoVisual } from "@/components/portfolio/visuals";
 
-const title = `${site.name} — Student, Developer & AI Builder`;
+const title = `${displayName} — Student, Developer & AI Builder`;
 const description =
   "Portfolio of a student, developer and AI builder from Egypt. Projects in progress: Mizano and KingdomForge.";
 
@@ -18,6 +18,7 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: siteUrl ? [{ rel: "canonical", href: `${siteUrl}/` }] : [],
   }),
   component: Index,
 });
@@ -131,6 +132,13 @@ function Index() {
                         </span>
                       ))}
                     </div>
+                    <Link
+                      to="/projects/$slug"
+                      params={{ slug: p.id }}
+                      className="mt-5 inline-flex items-center gap-2 self-start text-sm font-semibold text-primary hover:underline"
+                    >
+                      View project details <ArrowRight className="size-4" />
+                    </Link>
                   </div>
                 </article>
               </Reveal>
@@ -168,9 +176,13 @@ function Index() {
                 <p className="mx-auto mt-4 max-w-md text-muted-foreground">
                   Questions, feedback on a project, or an idea to collaborate on — my inbox is open.
                 </p>
-                <a href={`mailto:${site.email}`} className={`${btn} mt-8 bg-gradient-brand text-primary-foreground hover:-translate-y-0.5`}>
-                  <Mail className="size-4" /> {site.email} <ArrowUpRight className="size-4" />
-                </a>
+                {contactEmail ? (
+                  <a href={`mailto:${contactEmail}`} className={`${btn} mt-8 bg-gradient-brand text-primary-foreground hover:-translate-y-0.5`}>
+                    <Mail className="size-4" /> {contactEmail} <ArrowUpRight className="size-4" />
+                  </a>
+                ) : (
+                  <p className="mt-8 font-mono text-sm text-muted-foreground">Contact details coming soon.</p>
+                )}
                 <div className="mt-8 flex justify-center">
                   <SocialRow />
                 </div>
@@ -182,7 +194,7 @@ function Index() {
 
       <footer className="relative border-t">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 py-8 text-sm text-muted-foreground sm:flex-row">
-          <p>© {new Date().getFullYear()} {site.name}</p>
+          <p>© {new Date().getFullYear()} {displayName}</p>
           <a href="#top" className="hover:text-foreground">Back to top ↑</a>
         </div>
       </footer>
