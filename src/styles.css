@@ -160,7 +160,7 @@
 
 .teardown { perspective: 900px; }
 .teardown-layer { transform: rotateX(55deg) rotateZ(-30deg) translateZ(calc(var(--i) * -6px)); transition: transform .9s cubic-bezier(.2,.7,.2,1); }
-.teardown.is-open .teardown-layer { transform: rotateX(55deg) rotateZ(-30deg) translateY(calc(var(--i) * 3.2rem - 4rem)); }
+.teardown.is-open .teardown-layer { transform: rotateX(55deg) rotateZ(-30deg) translateZ(calc(100px - var(--i) * 70px)); }
 
 @media (prefers-reduced-motion: reduce) {
   .teardown-layer { transition: none; }
