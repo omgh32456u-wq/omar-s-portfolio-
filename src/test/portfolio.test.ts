@@ -1,7 +1,17 @@
 import { QueryClient } from "@tanstack/react-query";
 import { createRouter } from "@tanstack/react-router";
 import { describe, expect, it } from "vitest";
-import { activeSocials, contactEmail, displayName, isSet, projects } from "@/content/site";
+import {
+  activeSocials,
+  activeSupportPlatforms,
+  contactEmail,
+  displayName,
+  isSet,
+  isValidUrl,
+  projects,
+  skills,
+  stackLayers,
+} from "@/content/site";
 import { routeTree } from "@/routeTree.gen";
 
 describe("placeholder guard", () => {
@@ -16,6 +26,24 @@ describe("placeholder guard", () => {
     expect(contactEmail).not.toBe("you@example.com");
     expect(activeSocials.some((s) => s.href.includes("your-username"))).toBe(false);
     expect(displayName).not.toBe("Your Name");
+  });
+});
+
+describe("skills and support", () => {
+  it("lists Dart and Flutter in skills and teardown layers", () => {
+    const all = skills.flatMap((g) => g.items);
+    expect(all).toContain("Dart");
+    expect(all).toContain("Flutter");
+    const layerTools = stackLayers.flatMap((l) => l.tools);
+    expect(layerTools).toContain("Dart");
+    expect(layerTools).toContain("Flutter");
+  });
+  it("hides support platforms without a real https URL", () => {
+    expect(isValidUrl("")).toBe(false);
+    expect(isValidUrl("https://buymeacoffee.com/your-username")).toBe(false);
+    expect(isValidUrl("http://buymeacoffee.com/omar")).toBe(false);
+    expect(isValidUrl("https://buymeacoffee.com/omar")).toBe(true);
+    expect(activeSupportPlatforms.every((p) => isValidUrl(p.url))).toBe(true);
   });
 });
 

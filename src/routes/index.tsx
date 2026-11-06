@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ArrowUpRight, Mail, MapPin } from "lucide-react";
-import { contactEmail, displayName, projects, site, siteUrl, skills } from "@/content/site";
+import { ArrowRight, ArrowUpRight, Coffee, Mail, MapPin } from "lucide-react";
+import { activeSupportPlatforms, contactEmail, displayName, projects, site, siteUrl, skills, support } from "@/content/site";
+import { DeviceTeardown } from "@/components/portfolio/device-teardown";
 import { Header, Reveal, SectionHeading, SocialRow } from "@/components/portfolio/parts";
 import { HeroDiagram, KingdomVisual, MizanoVisual } from "@/components/portfolio/visuals";
 
@@ -161,6 +162,41 @@ function Index() {
                   </ul>
                 </div>
               ))}
+            </div>
+          </Reveal>
+        </section>
+
+        {/* Device teardown (3D foundation) */}
+        <section id="stack" className="mx-auto max-w-6xl px-5 py-20">
+          <Reveal>
+            <SectionHeading index="04" kicker="Under the hood" title="The layers I build with." />
+            <DeviceTeardown />
+          </Reveal>
+        </section>
+
+        {/* Support */}
+        <section id="support" aria-labelledby="support-title" className="mx-auto max-w-6xl px-5 py-12">
+          <Reveal>
+            <div className="glass flex flex-col gap-6 rounded-2xl p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+              <div className="max-w-xl">
+                <h2 id="support-title" className="flex items-center gap-2 text-2xl font-semibold">
+                  <Coffee className="size-5 text-accent" /> {support.title}
+                </h2>
+                <p className="mt-2 text-muted-foreground">{support.body}</p>
+              </div>
+              {activeSupportPlatforms.length ? (
+                <div className="flex flex-wrap gap-3">
+                  {activeSupportPlatforms.map((p) => (
+                    <a key={p.id} href={p.url} target="_blank" rel="noopener noreferrer" className={`${btn} border bg-surface/60 hover:border-accent/60`}>
+                      {p.label} <ArrowUpRight className="size-4" />
+                    </a>
+                  ))}
+                </div>
+              ) : (
+                <p data-testid="support-soon" className="shrink-0 rounded-full border border-dashed px-4 py-2 font-mono text-xs text-muted-foreground">
+                  Support links coming soon
+                </p>
+              )}
             </div>
           </Reveal>
         </section>

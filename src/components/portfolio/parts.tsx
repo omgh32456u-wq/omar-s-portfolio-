@@ -111,7 +111,7 @@ export function Header() {
   }, [open]);
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition ${scrolled || open ? "border-b bg-background/80 backdrop-blur-xl" : ""}`}
+      className={`fixed inset-x-0 top-0 z-50 transition ${scrolled || open ? "glass-nav" : ""}`}
     >
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5" aria-label="Main">
         <a href="/" className="flex items-center gap-2 font-display font-semibold">
