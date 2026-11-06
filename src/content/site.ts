@@ -99,10 +99,35 @@ export const projects: Project[] = [
 
 export const skills = [
   { group: "Languages", items: ["JavaScript", "TypeScript", "Python", "HTML & CSS"] }, // [EDIT]
+  { group: "Mobile", items: ["Dart", "Flutter", "Cross-platform UI"] }, // [EDIT]
   { group: "Building", items: ["React", "Responsive UI", "Git & GitHub", "REST APIs"] }, // [EDIT]
   { group: "AI workflow", items: ["Prompt design", "AI-assisted coding", "LLM tools", "Rapid prototyping"] }, // [EDIT]
   { group: "Thinking", items: ["Product scoping", "Systems design", "Game design", "Learning in public"] }, // [EDIT]
 ];
+
+// ── Device "teardown" layers ─────────────────────────────────
+// Each layer of the laptop placeholder reveals one discipline. Later this
+// same data can drive a real 3D/WebGL scene — keep the shape stable.
+export type StackLayer = { id: string; part: string; label: string; tools: string[]; tone: "primary" | "accent" };
+export const stackLayers: StackLayer[] = [
+  { id: "screen", part: "Display", label: "Interface", tools: ["Flutter", "React", "HTML & CSS"], tone: "primary" },
+  { id: "board", part: "Logic board", label: "Languages", tools: ["Dart", "TypeScript", "Python"], tone: "accent" },
+  { id: "chip", part: "Processor", label: "AI workflow", tools: ["Prompt design", "LLM tools"], tone: "primary" },
+  { id: "chassis", part: "Chassis", label: "Foundations", tools: ["Git & GitHub", "Systems design"], tone: "accent" },
+];
+
+// ── Support my work ──────────────────────────────────────────
+// Platforms only render as links once `url` is a real https:// address.
+export const support = {
+  title: "Support my work",
+  body:
+    "I'm an independent student developer — building, learning and sharing projects in the open. If something here was useful or interesting, a small contribution helps me keep going. Completely optional, always appreciated.", // [EDIT]
+  platforms: [
+    { id: "buymeacoffee", label: "Buy Me a Coffee", url: "" }, // [EDIT] e.g. https://buymeacoffee.com/yourname
+  ],
+};
+export const isValidUrl = (u: string) => /^https:\/\/[^\s/$.?#].[^\s]*$/i.test(u) && isSet(u);
+export const activeSupportPlatforms = support.platforms.filter((p) => isValidUrl(p.url));
 
 export const nav = [
   { id: "about", label: "About" },
