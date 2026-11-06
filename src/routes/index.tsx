@@ -207,7 +207,7 @@ function Index() {
             <div className="glass relative overflow-hidden rounded-3xl p-8 text-center sm:p-14">
               <div className="bg-ambient pointer-events-none absolute inset-0" />
               <div className="relative">
-                <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-primary">04 // Contact</p>
+                <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-primary">05 // Contact</p>
                 <h2 className="text-3xl font-semibold sm:text-5xl">Let's build something.</h2>
                 <p className="mx-auto mt-4 max-w-md text-muted-foreground">
                   Questions, feedback on a project, or an idea to collaborate on — my inbox is open.
