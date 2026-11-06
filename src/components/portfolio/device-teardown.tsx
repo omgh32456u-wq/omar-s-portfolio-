@@ -17,7 +17,7 @@ export function DeviceTeardown() {
       setOpen(true);
       return;
     }
-    const io = new IntersectionObserver(([e]) => setOpen(e.isIntersecting), { threshold: 0.35 });
+    const io = new IntersectionObserver(([e]) => setOpen(!!e?.isIntersecting), { threshold: 0.35 });
     io.observe(el);
     return () => io.disconnect();
   }, []);

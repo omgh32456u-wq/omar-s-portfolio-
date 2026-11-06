@@ -151,7 +151,7 @@ function Index() {
         <section id="skills" className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
             <SectionHeading index="03" kicker="Skills & tools" title="What I work with." />
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
               {skills.map((g) => (
                 <div key={g.group} className="glass rounded-2xl p-6 transition hover:border-accent/40">
                   <h3 className="mb-4 font-mono text-xs uppercase tracking-widest text-primary">{g.group}</h3>
