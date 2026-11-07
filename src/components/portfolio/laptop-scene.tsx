@@ -106,7 +106,7 @@ function Laptop({ progressRef }: { progressRef: MutableRefObject<number> }) {
             <meshBasicMaterial color={TEAL} />
           </mesh>
         </group>
-        {false && <PartLabel text={t(layer("screen").part)} tone="primary" position={[0, 1.4, 0]} progressRef={progressRef} />
+        {false && <PartLabel text={t(layer("screen").part)} tone="primary" position={[0, 1.4, 0]} progressRef={progressRef} />}
       </Part>
 
       {/* Keyboard deck */}
@@ -124,7 +124,7 @@ function Laptop({ progressRef }: { progressRef: MutableRefObject<number> }) {
           <boxGeometry args={[2.9, 0.02, 1.1]} />
           <meshStandardMaterial color="#20242f" metalness={0.3} roughness={0.6} />
         </mesh>
-        {false && <PartLabel text={t(layer("deck").part)} tone="accent" position={[0, 0.45, 0]} progressRef={progressRef} />
+        {false && <PartLabel text={t(layer("deck").part)} tone="accent" position={[0, 0.45, 0]} progressRef={progressRef} />}
       </Part>
 
       {/* Logic board */}
@@ -137,7 +137,7 @@ function Laptop({ progressRef }: { progressRef: MutableRefObject<number> }) {
           <boxGeometry args={[0.35, 0.03, 0.35]} />
           <meshStandardMaterial color={BODY_DARK} metalness={0.5} roughness={0.4} />
         </mesh>
-        {false && <PartLabel text={t(layer("board").part)} tone="primary" position={[0, 0.4, 0]} progressRef={progressRef} />
+        {false && <PartLabel text={t(layer("board").part)} tone="primary" position={[0, 0.4, 0]} progressRef={progressRef} />}
       </Part>
 
       {/* Processor */}
@@ -146,7 +146,7 @@ function Laptop({ progressRef }: { progressRef: MutableRefObject<number> }) {
           <boxGeometry args={[0.5, 0.07, 0.5]} />
           <meshStandardMaterial color={BODY_DARK} emissive={VIOLET} emissiveIntensity={0.55} metalness={0.6} roughness={0.35} />
         </mesh>
-        {false && <PartLabel text={t(layer("chip").part)} tone="accent" position={[0, 0.4, 0]} progressRef={progressRef} />
+        {false && <PartLabel text={t(layer("chip").part)} tone="accent" position={[0, 0.4, 0]} progressRef={progressRef} />}
       </Part>
 
       {/* Memory & storage */}
@@ -159,7 +159,7 @@ function Laptop({ progressRef }: { progressRef: MutableRefObject<number> }) {
           <boxGeometry args={[0.95, 0.05, 0.22]} />
           <meshStandardMaterial color={BODY_DARK} emissive={TEAL} emissiveIntensity={0.4} metalness={0.5} roughness={0.4} />
         </mesh>
-        {false && <PartLabel text={t(layer("memory").part)} tone="primary" position={[0, 0.4, 0]} progressRef={progressRef} />
+        {false && <PartLabel text={t(layer("memory").part)} tone="primary" position={[0, 0.4, 0]} progressRef={progressRef} />}
       </Part>
 
       {/* Battery */}
@@ -168,7 +168,7 @@ function Laptop({ progressRef }: { progressRef: MutableRefObject<number> }) {
           <boxGeometry args={[2.2, 0.09, 0.8]} />
           <meshStandardMaterial color="#232838" metalness={0.45} roughness={0.5} />
         </mesh>
-        {false && <PartLabel text={t(layer("battery").part)} tone="accent" position={[0, -0.4, 0]} progressRef={progressRef} />
+        {false && <PartLabel text={t(layer("battery").part)} tone="accent" position={[0, -0.4, 0]} progressRef={progressRef} />}
       </Part>
 
       {/* Cooling fan */}
@@ -181,7 +181,7 @@ function Laptop({ progressRef }: { progressRef: MutableRefObject<number> }) {
           <torusGeometry args={[0.26, 0.025, 8, 24]} />
           <meshStandardMaterial color={VIOLET} emissive={VIOLET} emissiveIntensity={0.35} metalness={0.4} roughness={0.4} />
         </mesh>
-        {false && <PartLabel text={t(layer("fan").part)} tone="primary" position={[0, 0.42, 0]} progressRef={progressRef} />
+        {false && <PartLabel text={t(layer("fan").part)} tone="primary" position={[0, 0.42, 0]} progressRef={progressRef} />}
       </Part>
     </group>
   );
@@ -210,7 +210,7 @@ export default function LaptopScene({
       <directionalLight position={[5, 8, 4]} intensity={1.8} />
       <pointLight position={[-5, 3, 4]} intensity={22} color={TEAL} />
       <pointLight position={[5, 2, -4]} intensity={18} color={VIOLET} />
-      <Laptop progressRef={progressRef} />
+      <Laptop progressRef={progressRef} />}
     </Canvas>
   );
 }
