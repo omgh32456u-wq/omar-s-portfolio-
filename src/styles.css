@@ -72,27 +72,27 @@
 }
 
 :root.light {
-  --background: oklch(0.975 0.005 285);
-  --foreground: oklch(0.24 0.025 275);
+  --background: oklch(0.965 0.008 285);
+  --foreground: oklch(0.22 0.03 275);
   --surface: oklch(1 0 0);
-  --surface-2: oklch(0.95 0.008 285);
-  --card: oklch(1 0 0 / 0.8);
+  --surface-2: oklch(0.93 0.012 285);
+  --card: oklch(1 0 0 / 0.85);
   --popover: oklch(1 0 0);
-  --primary: oklch(0.52 0.1 180);
+  --primary: oklch(0.5 0.11 182);
   --primary-foreground: oklch(0.98 0.01 180);
-  --secondary: oklch(0.94 0.01 285);
-  --muted: oklch(0.94 0.01 285);
-  --muted-foreground: oklch(0.47 0.025 280);
-  --accent: oklch(0.52 0.18 295);
+  --secondary: oklch(0.93 0.012 285);
+  --muted: oklch(0.925 0.012 285);
+  --muted-foreground: oklch(0.42 0.03 280);
+  --accent: oklch(0.5 0.19 295);
   --accent-foreground: oklch(0.98 0.01 295);
-  --border: oklch(0.24 0.025 275 / 0.1);
-  --input: oklch(0.24 0.025 275 / 0.15);
-  --ring: oklch(0.52 0.1 180);
-  --grid: oklch(0.24 0.025 275 / 0.05);
-  --glow-primary: oklch(0.6 0.1 180 / 0.14);
-  --glow-accent: oklch(0.6 0.16 295 / 0.12);
-  --shadow-soft: 0 20px 50px -28px oklch(0.3 0.03 275 / 0.35);
-  --glass-highlight: oklch(1 0 0 / 0.9);
+  --border: oklch(0.24 0.025 275 / 0.16);
+  --input: oklch(0.24 0.025 275 / 0.22);
+  --ring: oklch(0.5 0.11 182);
+  --grid: oklch(0.24 0.025 275 / 0.07);
+  --glow-primary: oklch(0.72 0.1 180 / 0.28);
+  --glow-accent: oklch(0.74 0.14 295 / 0.24);
+  --shadow-soft: 0 18px 44px -26px oklch(0.35 0.04 275 / 0.4);
+  --glass-highlight: oklch(1 0 0 / 0.95);
   --reflection: linear-gradient(145deg, var(--glass-highlight), transparent 45%, transparent 82%, var(--glow-primary));
   color-scheme: light;
 }
@@ -163,6 +163,33 @@
 @keyframes float { 50% { transform: translateY(-8px); } }
 .animate-dash { animation: dash 3s linear infinite; }
 .animate-float { animation: float 6s ease-in-out infinite; }
+
+/* Portrait + 3D laptop scene */
+.portrait-frame {
+  border: 1px solid var(--border);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--primary) 12%, transparent), var(--shadow-soft);
+  background: var(--surface);
+  z-index: 1;
+}
+.laptop-canvas canvas { touch-action: pan-y; }
+.scene-labels { pointer-events: none; }
+.scene-label {
+  opacity: 0;
+  transition: opacity .4s ease;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--foreground);
+  box-shadow: var(--shadow-soft);
+}
+.scene-label-primary { border-color: color-mix(in oklab, var(--primary) 45%, transparent); color: var(--primary); }
+.scene-label-accent { border-color: color-mix(in oklab, var(--accent) 45%, transparent); color: var(--accent); }
 
 .teardown { perspective: 900px; }
 .teardown-layer { transform: rotateX(55deg) rotateZ(-30deg) translateZ(calc(var(--i) * -6px)); transition: transform .9s cubic-bezier(.2,.7,.2,1); }
