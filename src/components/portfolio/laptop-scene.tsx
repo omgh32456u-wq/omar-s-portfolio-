@@ -28,8 +28,8 @@ const PARTS: PartDef[] = [
   { id: "fan", base: [1.2, 0.09, -0.55], dir: [0.3, 1, -0.1], mag: 1.15, start: 0.48, end: 1.0 },
 ];
 
-const BODY = "#262b3a";
-const BODY_DARK = "#1b1f2c";
+const BODY = "#39415a";
+const BODY_DARK = "#2a3042";
 const TEAL = "#38c6b0";
 const VIOLET = "#a77bfa";
 
@@ -83,25 +83,25 @@ function Laptop({ progressRef }: { progressRef: MutableRefObject<number> }) {
 
       {/* Display assembly */}
       <Part def={PARTS[0]!} progressRef={progressRef}>
-        <group rotation={[-1.72, 0, 0]} position={[0, -1.0, 0]}>
-          <mesh position={[0, 1.1, 0]}>
+        <group rotation={[-0.3, 0, 0]}>
+          <mesh>
             <boxGeometry args={[3.4, 2.2, 0.09]} />
             <meshStandardMaterial color={BODY} metalness={0.6} roughness={0.4} />
           </mesh>
-          <mesh position={[0, 1.1, 0.055]}>
+          <mesh position={[0, 0, 0.055]}>
             <planeGeometry args={[3.1, 1.9]} />
-            <meshStandardMaterial color="#10131d" emissive={TEAL} emissiveIntensity={0.16} roughness={0.25} />
+            <meshStandardMaterial color="#10131d" emissive={TEAL} emissiveIntensity={0.35} roughness={0.25} />
           </mesh>
           {/* Suggested UI bars on the screen */}
-          <mesh position={[-0.7, 1.45, 0.06]}>
+          <mesh position={[-0.7, 0.35, 0.06]}>
             <planeGeometry args={[1.5, 0.16]} />
             <meshBasicMaterial color={TEAL} />
           </mesh>
-          <mesh position={[-0.95, 1.15, 0.06]}>
+          <mesh position={[-0.95, 0.05, 0.06]}>
             <planeGeometry args={[1.0, 0.12]} />
             <meshBasicMaterial color={VIOLET} />
           </mesh>
-          <mesh position={[-1.05, 0.9, 0.06]}>
+          <mesh position={[-1.05, -0.2, 0.06]}>
             <planeGeometry args={[0.8, 0.12]} />
             <meshBasicMaterial color={TEAL} />
           </mesh>
@@ -205,10 +205,11 @@ export default function LaptopScene({
       onCreated={onReady}
       style={{ background: "transparent" }}
     >
-      <ambientLight intensity={0.55} />
-      <directionalLight position={[5, 8, 4]} intensity={1.1} />
-      <pointLight position={[-5, 3, 4]} intensity={18} color={TEAL} />
-      <pointLight position={[5, 2, -4]} intensity={14} color={VIOLET} />
+      <ambientLight intensity={0.9} />
+      <hemisphereLight args={["#c8d4e0", "#1a1e2a", 0.7]} />
+      <directionalLight position={[5, 8, 4]} intensity={1.8} />
+      <pointLight position={[-5, 3, 4]} intensity={22} color={TEAL} />
+      <pointLight position={[5, 2, -4]} intensity={18} color={VIOLET} />
       <Laptop progressRef={progressRef} />
     </Canvas>
   );
