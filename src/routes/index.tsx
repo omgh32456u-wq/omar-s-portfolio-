@@ -89,8 +89,8 @@ function Index() {
                   ["now", "Building Mizano, KingdomForge & Nafas"],
                 ].map(([k, v]) => (
                   <li key={k} className="flex justify-between gap-4 border-b pb-3 last:border-0 last:pb-0">
-                    <span className="text-primary">{t(k)}</span>
-                    <span className="text-end text-foreground">{t(v)}</span>
+                    <span className="text-primary">{t(k ?? "")}</span>
+                    <span className="text-end text-foreground">{t(v ?? "")}</span>
                   </li>
                 ))}
               </ul>

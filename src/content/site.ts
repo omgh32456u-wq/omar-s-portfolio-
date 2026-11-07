@@ -335,8 +335,8 @@ export const localizeProject = (project: Project, language: "en" | "ar"): Projec
   planned: project.planned.map((text) => translate(text, language)),
   notYet: translate(project.notYet, language),
   stack: project.stack.map((text) => translate(text, language)),
-  problem: project.problem && translate(project.problem, language),
-  approach: project.approach && translate(project.approach, language),
-  currentProgress: project.currentProgress && translate(project.currentProgress, language),
-  learnings: project.learnings?.map((text) => translate(text, language)),
+  ...(project.problem ? { problem: translate(project.problem, language) } : {}),
+  ...(project.approach ? { approach: translate(project.approach, language) } : {}),
+  ...(project.currentProgress ? { currentProgress: translate(project.currentProgress, language) } : {}),
+  ...(project.learnings ? { learnings: project.learnings.map((text) => translate(text, language)) } : {}),
 });
