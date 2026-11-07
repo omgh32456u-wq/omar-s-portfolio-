@@ -68,14 +68,14 @@ function Index() {
             </div>
           </Reveal>
           <Reveal>
-            <div className="relative mx-auto w-full max-w-md pt-20">
+            <div className="relative mx-auto w-full max-w-md pt-28">
               <img
                 src={omarPortrait.url}
                 alt={t("Portrait of Omar Elhady")}
                 width={1024}
                 height={1024}
                 loading="eager"
-                className="portrait-frame absolute -top-0 end-2 w-36 rounded-2xl object-cover sm:w-44"
+                className="portrait-frame absolute top-0 end-2 w-32 rounded-2xl object-cover sm:w-36"
               />
               <HeroDiagram />
             </div>
