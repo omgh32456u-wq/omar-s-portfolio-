@@ -34,3 +34,4 @@ use the editor.
 - Keep bilingual copy and project localization in src/content/site.ts; a shared LanguageProvider owns persistence and document direction so all routes switch together.
 - Use ProjectVisual for shared illustrative previews on cards and detail pages; preview labels must distinguish concepts from shipped products.
 - Mirror only directional navigation icons in RTL; preserve brand, utility and LTR code icons so language switching keeps their meaning.
+- The laptop section uses a React Three Fiber scene (laptop-scene.tsx) loaded via dynamic import inside useEffect, never React.lazy/Suspense: a suspense boundary around <Canvas> triggers React 19 "synchronously unmount a root" errors. Scroll progress reaches the scene through a ref, not state.
