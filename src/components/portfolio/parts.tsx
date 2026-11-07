@@ -71,7 +71,8 @@ export function SocialRow() {
             target="_blank"
             rel="noreferrer noopener"
             aria-label={s.label}
-            className="grid size-10 place-items-center rounded-full border bg-surface/60 text-muted-foreground transition hover:-translate-y-0.5 hover:border-primary/50 hover:text-primary"
+            title={s.label}
+            className={`social-link social-${s.icon} ${s.icon === "tiktok" || s.icon === "whatsapp" ? "social-priority" : ""} grid size-11 place-items-center rounded-full border transition hover:-translate-y-0.5`}
           >
             <SocialIcon name={s.icon} />
           </a>

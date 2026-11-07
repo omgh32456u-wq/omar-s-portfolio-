@@ -186,7 +186,44 @@ export const techSnippets = [
   { language: "Flutter", code: "Widget build() => Experience();", accent: "accent" },
 ] as const;
 
+// Counts describe the displayed portfolio, never clients or performance claims.
+export const portfolioLanguages = ["en", "ar"] as const;
+export const heroMetrics = [
+  { value: projects.length, label: "Featured projects" },
+  { value: techSnippets.length, label: "Core technologies" },
+  { value: portfolioLanguages.length, label: "Site languages · EN / AR" },
+];
+// Optional verified business figures can be added later; unset means not shown.
+export const verifiedBusinessMetrics: { clients?: number; satisfactionPercent?: number } = {};
+export const codingNodes = [
+  { id: "js", label: "JavaScript", detail: "Logic & interaction", x: 15, y: 22 },
+  { id: "python", label: "Python", detail: "Data & problem-solving", x: 50, y: 12 },
+  { id: "dart", label: "Dart", detail: "Application logic", x: 85, y: 22 },
+  { id: "ui", label: "UI", detail: "Interface & experience", x: 15, y: 72 },
+  { id: "apps", label: "Apps & projects", detail: "Ideas connected through code", x: 50, y: 48 },
+  { id: "flutter", label: "Flutter", detail: "Cross-platform interfaces", x: 85, y: 72 },
+  { id: "apis", label: "APIs & data", detail: "Connected systems", x: 50, y: 87 },
+] as const;
+
 export const arabic: Record<string, string> = {
+  "Featured projects": "مشاريع مختارة",
+  "Core technologies": "تقنيات أساسية",
+  "Site languages · EN / AR": "لغتا الموقع · العربية والإنجليزية",
+  "Interactive coding map": "خريطة التطوير التفاعلية",
+  "Connecting ideas through code.": "ربط الأفكار بالكود.",
+  "Logic & interaction": "المنطق والتفاعل",
+  "Data & problem-solving": "البيانات وحلّ المشكلات",
+  "Application logic": "منطق التطبيقات",
+  "Interface & experience": "الواجهة وتجربة الاستخدام",
+  "Ideas connected through code": "أفكار يربطها الكود",
+  "Cross-platform interfaces": "واجهات متعددة المنصات",
+  "Connected systems": "أنظمة مترابطة",
+  "UI": "الواجهات",
+  "Apps & projects": "التطبيقات والمشاريع",
+  "APIs & data": "الواجهات البرمجية والبيانات",
+  "Laptop illustration": "رسم توضيحي للحاسوب",
+  "Display, keyboard and internal layers": "الشاشة ولوحة المفاتيح والمكوّنات الداخلية",
+  "Interface, logic and data — each layer connects to the tools below.": "الواجهة والمنطق والبيانات؛ كل طبقة ترتبط بالأدوات الموضّحة أدناه.",
   "Portfolio": "أعمالي",
   "Egypt": "مصر",
   "Student": "طالب",
