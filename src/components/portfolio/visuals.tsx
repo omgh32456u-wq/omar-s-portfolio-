@@ -1,100 +1,64 @@
-// Original abstract concept visuals — not real screenshots.
+import { CalendarDays, Check, Leaf, Timer, Sparkles } from "lucide-react";
+import { techSnippets } from "@/content/site";
+import { useLanguage } from "./language";
+import kingdomConcept from "@/assets/kingdom-concept.jpg";
 
 export function HeroDiagram() {
-  const nodes = [
-    { x: 60, y: 70, label: "learn()", c: "var(--accent)" },
-    { x: 300, y: 50, label: "build()", c: "var(--primary)" },
-    { x: 340, y: 250, label: "ship()", c: "var(--primary)" },
-    { x: 90, y: 290, label: "ai.assist()", c: "var(--accent)" },
-  ];
+  const { t } = useLanguage();
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-md" aria-hidden="true">
-      <svg viewBox="0 0 400 360" className="absolute inset-0 size-full">
-        <g fill="none" stroke="var(--muted-foreground)" strokeOpacity="0.35" strokeWidth="1.2">
-          <path d="M60 70 C 180 20, 220 120, 300 50" strokeDasharray="4 6" className="animate-dash" />
-          <path d="M300 50 C 380 120, 280 180, 340 250" strokeDasharray="4 6" className="animate-dash" />
-          <path d="M340 250 C 250 330, 170 260, 90 290" strokeDasharray="4 6" className="animate-dash" />
-          <path d="M90 290 C 10 220, 120 150, 60 70" strokeDasharray="4 6" className="animate-dash" />
-          <path d="M60 70 L200 180 L340 250 M300 50 L200 180 L90 290" strokeOpacity="0.2" />
-        </g>
-        {nodes.map((n) => (
-          <g key={n.label}>
-            <circle cx={n.x} cy={n.y} r="14" fill={n.c} fillOpacity="0.15" />
-            <circle cx={n.x} cy={n.y} r="5" fill={n.c} />
-            <text x={n.x + 14} y={n.y - 16} fill="var(--muted-foreground)" fontSize="11" fontFamily="JetBrains Mono, monospace">
-              {n.label}
-            </text>
-          </g>
-        ))}
-      </svg>
-      <div className="glass animate-float absolute left-1/2 top-1/2 w-56 -translate-x-1/2 -translate-y-1/2 rounded-2xl p-4 font-mono text-xs">
-        <div className="mb-3 flex gap-1.5">
-          <span className="size-2.5 rounded-full bg-accent/70" />
-          <span className="size-2.5 rounded-full bg-primary/70" />
-          <span className="size-2.5 rounded-full bg-muted-foreground/40" />
+    <div className="code-workspace mx-auto w-full max-w-md">
+      <div className="glass code-window overflow-hidden rounded-xl" dir="ltr">
+        <div className="flex items-center justify-between border-b px-5 py-3 text-xs text-muted-foreground">
+          <div className="flex gap-1.5" aria-hidden><span className="size-2 rounded-full bg-accent/70"/><span className="size-2 rounded-full bg-primary/70"/><span className="size-2 rounded-full bg-muted-foreground/40"/></div>
+          <span className="font-mono">identity.js</span><span className="text-primary">JS</span>
         </div>
-        <p><span className="text-accent">const</span> me = {"{"}</p>
-        <p className="pl-4">student: <span className="text-primary">true</span>,</p>
-        <p className="pl-4">builds: <span className="text-primary">"software"</span>,</p>
-        <p className="pl-4">with: <span className="text-primary">"AI"</span>,</p>
-        <p>{"}"}</p>
+        <div className="code-lines p-6 font-mono text-sm leading-8 sm:p-8">
+          <p><span className="text-accent">const</span> me = {"{"}</p>
+          <p className="ps-5">student: <span className="text-primary">true</span>,</p>
+          <p className="ps-5">builds: <span className="text-primary">"software"</span>,</p>
+          <p className="ps-5">with: <span className="text-primary">"AI"</span>,</p>
+          <p className="ps-5">mindset: <span className="text-primary">"keep learning"</span></p>
+          <p>{"};"}<span className="code-cursor" aria-hidden>▎</span></p>
+        </div>
+      </div>
+      <p className="mb-3 mt-6 text-xs text-muted-foreground">{t("Technologies I work with / explore")}</p>
+      <div className="grid grid-cols-2 gap-2" dir="ltr">
+        {techSnippets.map((snippet) => <div key={snippet.language} className="tech-snippet rounded-lg border bg-surface/60 p-3">
+          <p className={`mb-2 font-mono text-xs ${snippet.accent === "primary" ? "text-primary" : "text-accent"}`}>{snippet.language}</p>
+          <code className="block break-words font-mono text-[10px] leading-5 text-muted-foreground">{snippet.code}</code>
+        </div>)}
       </div>
     </div>
   );
 }
 
 export function MizanoVisual() {
-  return (
-    <svg viewBox="0 0 320 200" className="size-full" aria-hidden="true">
-      <rect x="110" y="14" width="100" height="172" rx="16" fill="var(--surface-2)" stroke="var(--border)" />
-      <circle cx="160" cy="70" r="28" fill="none" stroke="var(--muted)" strokeWidth="8" />
-      <circle cx="160" cy="70" r="28" fill="none" stroke="var(--primary)" strokeWidth="8" strokeDasharray="120 200" strokeLinecap="round" transform="rotate(-90 160 70)" />
-      {[0, 1, 2].map((i) => (
-        <g key={i}>
-          <rect x="124" y={116 + i * 20} width="72" height="6" rx="3" fill="var(--muted)" />
-          <rect x="124" y={116 + i * 20} width={[50, 34, 60][i]} height="6" rx="3" fill={i === 1 ? "var(--accent)" : "var(--primary)"} fillOpacity={i === 2 ? 0.6 : 1} />
-        </g>
-      ))}
-      <g fontFamily="JetBrains Mono, monospace" fontSize="9" fill="var(--muted-foreground)">
-        <path d="M188 70 H240" stroke="var(--muted-foreground)" strokeOpacity=".4" strokeDasharray="3 3" />
-        <text x="244" y="73">calories</text>
-        <path d="M124 139 H70" stroke="var(--muted-foreground)" strokeOpacity=".4" strokeDasharray="3 3" />
-        <text x="22" y="142">protein</text>
-      </g>
-    </svg>
-  );
+  const { t } = useLanguage();
+  return <div className="product-preview nutrition-preview">
+    <div className="preview-top"><span className="flex items-center gap-2 text-primary"><Leaf className="size-4"/> Mizano</span><span>{t("Nutrition")}</span></div>
+    <div className="flex items-center gap-6 py-4">
+      <div className="nutrition-ring"><Leaf className="size-6 text-primary"/></div>
+      <div className="flex-1 space-y-3">{["Meals", "Protein", "Energy"].map((label, index) => <div key={label}><p className="mb-1 text-[10px] text-muted-foreground">{t(label)}</p><div className="preview-track"><span className={`preview-fill preview-fill-${index}`}/></div></div>)}</div>
+    </div>
+    <div className="flex items-center gap-2 border-t pt-3 text-[10px] text-muted-foreground"><Sparkles className="size-3 text-accent"/>{t("Mizo · planned companion")}</div>
+  </div>;
+}
+
+export function NafasVisual() {
+  const { t } = useLanguage();
+  return <div className="product-preview study-preview">
+    <div className="preview-top"><span className="text-accent">Nafas</span><span>{t("My learning space")}</span></div>
+    <div className="grid grid-cols-[1.2fr_0.8fr] gap-4 py-4">
+      <div><p className="mb-3 flex items-center gap-2 text-xs"><CalendarDays className="size-3 text-accent"/>{t("Study plan")}</p>{["Focus", "Review", "Progress"].map(label => <div key={label} className="mb-2 flex items-center gap-2 text-[10px] text-muted-foreground"><Check className="size-3 text-primary"/>{t(label)}<span className="ms-auto h-px w-5 bg-border"/></div>)}</div>
+      <div className="flex flex-col items-center justify-center border-s ps-3"><Timer className="mb-2 size-7 text-accent"/><span className="text-xs">{t("Focus")}</span><span className="mt-3 h-1 w-12 rounded-full bg-accent/30"/></div>
+    </div>
+  </div>;
 }
 
 export function KingdomVisual() {
-  const pts = [
-    [160, 50, "kingdom"],
-    [70, 110, "economy"],
-    [250, 110, "military"],
-    [110, 170, "citizens"],
-    [210, 170, "building"],
-  ] as const;
-  const edges: [number, number][] = [[0, 1], [0, 2], [1, 3], [1, 4], [2, 4], [3, 4], [1, 2]];
-  return (
-    <svg viewBox="0 0 320 200" className="size-full" aria-hidden="true">
-      <g stroke="var(--accent)" strokeOpacity=".4" strokeDasharray="3 4">
-        {edges.map(([a, b], i) => (
-          <line key={i} x1={pts[a]![0]} y1={pts[a]![1]} x2={pts[b]![0]} y2={pts[b]![1]} />
-        ))}
-      </g>
-      {pts.map(([x, y, l], i) => (
-        <g key={l}>
-          <polygon
-            points={`${x},${y - 14} ${x + 13},${y - 6} ${x + 13},${y + 8} ${x},${y + 15} ${x - 13},${y + 8} ${x - 13},${y - 6}`}
-            fill={i === 0 ? "var(--accent)" : "var(--surface-2)"}
-            fillOpacity={i === 0 ? 0.35 : 1}
-            stroke="var(--accent)"
-            strokeOpacity=".6"
-          />
-          <text x={x} y={y + 30} textAnchor="middle" fontSize="9" fontFamily="JetBrains Mono, monospace" fill="var(--muted-foreground)">
-            {l}
-          </text>
-        </g>
-      ))}
-    </svg>
-  );
+  return <img src={kingdomConcept} alt="" loading="lazy" width={1280} height={768} className="kingdom-image size-full object-cover"/>;
+}
+
+export function ProjectVisual({ visual }: { visual: "mizano" | "kingdom" | "nafas" }) {
+  return visual === "mizano" ? <MizanoVisual/> : visual === "nafas" ? <NafasVisual/> : <KingdomVisual/>;
 }

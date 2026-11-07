@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useLanguage } from "./language";
 import { stackLayers } from "@/content/site";
 
 /**
@@ -8,6 +9,7 @@ import { stackLayers } from "@/content/site";
  * Swap the <figure> for a WebGL scene later; keep `stackLayers` as the data source.
  */
 export function DeviceTeardown() {
+  const { t } = useLanguage();
   const ref = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
   useEffect(() => {
@@ -32,7 +34,7 @@ export function DeviceTeardown() {
             style={{ ["--i" as string]: i, top: `${4.5 + i * 0.6}rem`, zIndex: stackLayers.length - i }}
           >
             <span className={`absolute left-4 top-3 font-mono text-[10px] uppercase tracking-widest ${l.tone === "primary" ? "text-primary" : "text-accent"}`}>
-              {l.part}
+              {t(l.part)}
             </span>
             <span className={`absolute inset-x-4 bottom-3 h-px ${l.tone === "primary" ? "bg-primary/50" : "bg-accent/50"}`} />
           </div>
@@ -42,12 +44,12 @@ export function DeviceTeardown() {
         {stackLayers.map((l, i) => (
           <li key={l.id} className="glass rounded-xl p-4">
             <p className="font-mono text-xs text-muted-foreground">
-              0{i + 1} · {l.part}
+              0{i + 1} · {t(l.part)}
             </p>
-            <h3 className={`mt-1 text-lg font-semibold ${l.tone === "primary" ? "text-primary" : "text-accent"}`}>{l.label}</h3>
+            <h3 className={`mt-1 text-lg font-semibold ${l.tone === "primary" ? "text-primary" : "text-accent"}`}>{t(l.label)}</h3>
             <ul className="mt-2 flex flex-wrap gap-2">
-              {l.tools.map((t) => (
-                <li key={t} className="rounded-md bg-muted px-2 py-1 font-mono text-xs text-foreground">{t}</li>
+              {l.tools.map((tool) => (
+                <li key={tool} className="rounded-md bg-muted px-2 py-1 font-mono text-xs text-foreground">{t(tool)}</li>
               ))}
             </ul>
           </li>

@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Menu, Moon, Sun, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useLanguage } from "./language";
 import { activeSocials, displayInitials, displayName, nav } from "@/content/site";
 
 export function Reveal({ children, className = "" }: { children: ReactNode; className?: string }) {
@@ -7,6 +9,10 @@ export function Reveal({ children, className = "" }: { children: ReactNode; clas
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      el.classList.add("is-visible");
+      return;
+    }
     const io = new IntersectionObserver(
       ([e]) => {
         if (e?.isIntersecting) {
@@ -63,6 +69,7 @@ export function SocialRow() {
 }
 
 function ThemeToggle() {
+  const { t } = useLanguage();
   const [light, setLight] = useState(false);
   useEffect(() => {
     setLight(document.documentElement.classList.contains("light"));
@@ -78,17 +85,18 @@ function ThemeToggle() {
     }
   };
   return (
-    <button
+    <Button variant="outline" size="icon"
       onClick={toggle}
-      aria-label={light ? "Switch to dark theme" : "Switch to light theme"}
+      aria-label={t(light ? "Switch to dark theme" : "Switch to light theme")} title={t(light ? "Switch to dark theme" : "Switch to light theme")}
       className="grid size-10 place-items-center rounded-full border bg-surface/60 text-muted-foreground transition hover:text-foreground"
     >
       {light ? <Moon className="size-4" /> : <Sun className="size-4" />}
-    </button>
+    </Button>
   );
 }
 
 export function Header() {
+  const { language, setLanguage, t } = useLanguage();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -113,12 +121,12 @@ export function Header() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition ${scrolled || open ? "glass-nav" : ""}`}
     >
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5" aria-label="Main">
+      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5" aria-label={t("Main")}>
         <a href="/" className="flex items-center gap-2 font-display font-semibold">
           <span className="grid size-8 place-items-center rounded-lg bg-gradient-brand text-xs text-primary-foreground">
             {displayInitials}
           </span>
-          <span className="hidden sm:inline">{displayName}</span>
+          <span className="hidden sm:inline">{t(displayName)}</span>
         </a>
         <ul className="hidden items-center gap-1 md:flex">
           {nav.map((n) => (
@@ -127,22 +135,27 @@ export function Header() {
                 href={`/#${n.id}`}
                 className="rounded-full px-4 py-2 text-sm text-muted-foreground transition hover:bg-surface hover:text-foreground"
               >
-                {n.label}
+                {t(n.label)}
               </a>
             </li>
           ))}
         </ul>
         <div className="flex items-center gap-2">
+          <div dir="ltr" className="language-switch" role="group" aria-label="Language / اللغة">
+            <Button variant="ghost" size="sm" aria-pressed={language === "en"} onClick={() => setLanguage("en")} lang="en">EN</Button>
+            <span aria-hidden className="text-muted-foreground">/</span>
+            <Button variant="ghost" size="sm" aria-pressed={language === "ar"} onClick={() => setLanguage("ar")} lang="ar">عربي</Button>
+          </div>
           <ThemeToggle />
-          <button
+          <Button variant="outline" size="icon"
             className="grid size-10 place-items-center rounded-full border bg-surface/60 md:hidden"
             onClick={() => setOpen((o) => !o)}
             aria-expanded={open}
             aria-controls="mobile-nav"
-            aria-label={open ? "Close menu" : "Open menu"}
+            aria-label={t(open ? "Close menu" : "Open menu")}
           >
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
-          </button>
+          </Button>
         </div>
       </nav>
       {open && (
@@ -155,7 +168,7 @@ export function Header() {
                   onClick={() => setOpen(false)}
                   className="block border-b py-4 font-display text-lg"
                 >
-                  {n.label}
+                  {t(n.label)}
                 </a>
               </li>
             ))}
@@ -170,12 +183,13 @@ export function Header() {
 }
 
 export function SectionHeading({ index, kicker, title }: { index: string; kicker: string; title: string }) {
+  const { t } = useLanguage();
   return (
     <div className="mb-12">
       <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-primary">
-        <span className="text-muted-foreground">{index} //</span> {kicker}
+        <span className="text-muted-foreground">{index} //</span> {t(kicker)}
       </p>
-      <h2 className="text-3xl font-semibold sm:text-4xl">{title}</h2>
+      <h2 className="text-3xl font-semibold sm:text-4xl">{t(title)}</h2>
     </div>
   );
 }

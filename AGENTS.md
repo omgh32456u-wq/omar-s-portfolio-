@@ -31,3 +31,5 @@ use the editor.
 
 - All personal portfolio content (name, bio, email, socials, projects, skills) lives in src/content/site.ts so non-developers edit one file.
 - Keep support currency presets and provider availability in src/content/site.ts, with interaction isolated in SupportSection; verified integrations can replace unavailable providers without redesigning the portfolio.
+- Keep bilingual copy and project localization in src/content/site.ts; a shared LanguageProvider owns persistence and document direction so all routes switch together.
+- Use ProjectVisual for shared illustrative previews on cards and detail pages; preview labels must distinguish concepts from shipped products.
