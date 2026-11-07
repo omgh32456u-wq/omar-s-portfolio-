@@ -1,4 +1,8 @@
 # Portfolio refinement
+- [ ] Correct portrait-led hero and truthful bilingual metrics.
+- [ ] Verify visible desktop laptop and illustrated phone/reduced-motion fallback.
+- [ ] Add interactive coding map, brand social colors and theme depth.
+- [ ] Check live preview, tests and lint; do not publish.
 - [x] Refine glass, motion, hero code and technology previews.
 - [x] Add persistent English/Arabic language and direction switching.
 - [x] Refresh truthful project content and visuals, including Nafas.

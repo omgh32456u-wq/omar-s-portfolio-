@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
-import { contactEmail, displayName, projects, site, siteUrl, skills, localizeProject, projectSelection } from "@/content/site";
+import { contactEmail, displayName, projects, site, siteUrl, skills, localizeProject, projectSelection, heroMetrics } from "@/content/site";
 import omarPortrait from "@/assets/omar-portrait.png.asset.json";
 import { useLanguage } from "@/components/portfolio/language";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,7 @@ import { SupportSection } from "@/components/portfolio/support-section";
 import { DeviceTeardown } from "@/components/portfolio/device-teardown";
 import { Header, Reveal, SectionHeading, SocialRow } from "@/components/portfolio/parts";
 import { HeroDiagram, ProjectVisual } from "@/components/portfolio/visuals";
+import { CodingMap } from "@/components/portfolio/coding-map";
 
 const title = `${displayName} — Student Developer`;
 const description =
@@ -42,18 +43,13 @@ function Index() {
 
       <main className="relative">
         {/* Hero */}
-        <section className="mx-auto grid max-w-6xl items-center gap-12 px-5 pb-20 pt-32 md:grid-cols-[1.1fr_0.9fr] md:pt-40">
+        <section className="hero-section mx-auto grid max-w-6xl items-center gap-8 px-5 pb-12 pt-28 md:grid-cols-[1fr_1.1fr] md:pt-32">
           <Reveal>
             <p className="mb-6 inline-flex items-center gap-2 rounded-full border bg-surface/60 px-3 py-1 font-mono text-xs text-muted-foreground">
               <MapPin className="size-3 text-primary" /> {t(site.location)} · {t("open to collaborate")}
             </p>
-            <h1 className="text-4xl font-semibold leading-[1.05] sm:text-5xl">
-              {site.roles.map((r, i) => (
-                <span key={r} className="block">
-                  <span className="text-gradient">{t(r)}</span>
-                </span>
-              ))}
-            </h1>
+            <h1 className="text-4xl font-semibold leading-[1.1] sm:text-5xl">{t(displayName)}</h1>
+            <p className="mt-3 font-display text-2xl text-primary">{t("Student Developer")}</p>
             <p className="mt-6 max-w-lg text-lg text-muted-foreground">{t(site.tagline)}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild className={`${btn} bg-primary text-primary-foreground hover:-translate-y-0.5 hover:shadow-soft`}><a href="#projects">
@@ -66,18 +62,22 @@ function Index() {
             <div className="mt-10">
               <SocialRow />
             </div>
+            <dl className="hero-metrics mt-8 grid grid-cols-3 border-y py-5">
+              {heroMetrics.map((metric) => <div key={metric.label} className="px-3 first:ps-0"><dt className="text-xs text-muted-foreground">{t(metric.label)}</dt><dd className="mt-2 font-display text-3xl text-foreground" dir="ltr">{String(metric.value).padStart(2, "0")}</dd></div>)}
+            </dl>
           </Reveal>
           <Reveal>
-            <div className="relative mx-auto w-full max-w-md pt-28">
+            <div className="hero-composition relative mx-auto w-full">
               <img
                 src={omarPortrait.url}
                 alt={t("Portrait of Omar Elhady")}
                 width={1024}
                 height={1024}
                 loading="eager"
-                className="portrait-frame absolute top-0 end-2 w-32 rounded-2xl object-cover sm:w-36"
+                fetchPriority="high"
+                className="hero-portrait"
               />
-              <HeroDiagram />
+              <div className="hero-code"><HeroDiagram /></div>
             </div>
           </Reveal>
         </section>
@@ -107,6 +107,7 @@ function Index() {
               </ul>
             </div>
           </Reveal>
+          <div className="mt-14"><CodingMap /></div>
         </section>
 
         {/* Projects */}

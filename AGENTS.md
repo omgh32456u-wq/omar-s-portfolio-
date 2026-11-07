@@ -35,3 +35,5 @@ use the editor.
 - Use ProjectVisual for shared illustrative previews on cards and detail pages; preview labels must distinguish concepts from shipped products.
 - Mirror only directional navigation icons in RTL; preserve brand, utility and LTR code icons so language switching keeps their meaning.
 - The laptop section uses a React Three Fiber scene (laptop-scene.tsx) loaded via dynamic import inside useEffect, never React.lazy/Suspense: a suspense boundary around <Canvas> triggers React 19 "synchronously unmount a root" errors. Scroll progress reaches the scene through a ref, not state.
+- Laptop rendering is demand-driven and invalidated on visible scroll events; callouts stay in the accessible HTML list, not drei Html roots, to avoid React 19 nested-root lifecycle errors.
+- Coding map nodes and factual portfolio counts live in the shared content config; the map owns only selection and offscreen animation state.
