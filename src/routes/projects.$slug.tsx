@@ -1,9 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import type { ReactNode } from "react";
-import { displayName, getProject, isSet, siteUrl } from "@/content/site";
+import { displayName, getProject, isSet, siteUrl, localizeProject } from "@/content/site";
+import { useLanguage } from "@/components/portfolio/language";
 import { Header } from "@/components/portfolio/parts";
-import { KingdomVisual, MizanoVisual } from "@/components/portfolio/visuals";
+import { ProjectVisual } from "@/components/portfolio/visuals";
 
 export const Route = createFileRoute("/projects/$slug")({
   loader: ({ params }) => {
@@ -33,13 +34,14 @@ export const Route = createFileRoute("/projects/$slug")({
 });
 
 function ProjectNotFound() {
+  const { t } = useLanguage();
   return (
     <div className="flex min-h-screen items-center justify-center px-5">
       <div className="text-center">
-        <h1 className="text-3xl font-semibold">Project not found</h1>
-        <p className="mt-3 text-muted-foreground">That project doesn't exist (yet).</p>
+        <h1 className="text-3xl font-semibold">{t('Project not found')}</h1>
+        <p className="mt-3 text-muted-foreground">{t("That project doesn't exist (yet).")}</p>
         <Link to="/" hash="projects" className="mt-6 inline-flex items-center gap-2 text-primary hover:underline">
-          <ArrowLeft className="size-4" /> Back to projects
+          <ArrowLeft className="size-4" /> {t('Back to projects')}
         </Link>
       </div>
     </div>
@@ -47,17 +49,21 @@ function ProjectNotFound() {
 }
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
+  const { t } = useLanguage();
   return (
-    <section className="glass rounded-2xl p-6 sm:p-8">
-      <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-primary">{title}</h2>
+    <section className="border-t py-6 sm:py-8">
+      <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-primary">{t(title)}</h2>
       {children}
     </section>
   );
 }
 
 function ProjectPage() {
+  const { language, t } = useLanguage();
   const { slug } = Route.useLoaderData();
-  const p = getProject(slug)!;
+  const source = getProject(slug);
+  if (!source) return <ProjectNotFound/>;
+  const p = localizeProject(source, language);
   const hasCaseStudy = !!(p.problem || p.approach || p.currentProgress || p.learnings?.length);
   const links = [
     { label: "Source code", href: p.repoUrl },
@@ -69,11 +75,11 @@ function ProjectPage() {
       <div className="bg-ambient pointer-events-none absolute inset-x-0 top-0 h-[40rem]" />
       <Header />
       <main className="relative mx-auto max-w-4xl px-5 pb-20 pt-28">
-        <nav aria-label="Breadcrumb" className="mb-8 font-mono text-xs text-muted-foreground">
+        <nav aria-label={t("Breadcrumb")} className="mb-8 font-mono text-xs text-muted-foreground">
           <ol className="flex flex-wrap items-center gap-2">
-            <li><Link to="/" className="hover:text-foreground">Home</Link></li>
+            <li><Link to="/" className="hover:text-foreground">{t('Home')}</Link></li>
             <li aria-hidden="true">/</li>
-            <li><Link to="/" hash="projects" className="hover:text-foreground">Projects</Link></li>
+            <li><Link to="/" hash="projects" className="hover:text-foreground">{t('Projects')}</Link></li>
             <li aria-hidden="true">/</li>
             <li aria-current="page" className="text-foreground">{p.name}</li>
           </ol>
@@ -93,17 +99,17 @@ function ProjectPage() {
               {links.map((l) => (
                 <a key={l.label} href={l.href} target="_blank" rel="noreferrer noopener"
                   className="inline-flex items-center gap-2 rounded-full border bg-surface/60 px-5 py-2.5 text-sm font-semibold hover:border-primary/50">
-                  {l.label} <ArrowUpRight className="size-4" />
+                  {t(l.label)} <ArrowUpRight className="size-4" />
                 </a>
               ))}
             </div>
           )}
         </header>
 
-        <figure className="glass relative mb-8 h-64 overflow-hidden rounded-2xl bg-grid p-4 sm:h-80">
-          {p.visual === "mizano" ? <MizanoVisual /> : <KingdomVisual />}
-          <figcaption className="absolute bottom-2 right-3 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-            Concept visual
+        <figure className="glass project-figure relative mb-8 h-64 overflow-hidden rounded-xl sm:h-80">
+          <ProjectVisual visual={p.visual}/>
+          <figcaption className="visual-caption absolute inset-x-0 bottom-0 px-3 py-2 text-center text-[10px] text-muted-foreground">
+            {t(p.visual === "kingdom" ? "Concept art · not gameplay" : "Design preview · not a live app")}
           </figcaption>
         </figure>
 
@@ -136,7 +142,7 @@ function ProjectPage() {
           )}
           {!hasCaseStudy && (
             <p className="rounded-2xl border border-dashed p-6 text-center text-sm text-muted-foreground">
-              Case study details will be added as the project develops.
+              {t('Case study details will be added as the project develops.')}
             </p>
           )}
 
@@ -150,7 +156,7 @@ function ProjectPage() {
         </div>
 
         <Link to="/" hash="projects" className="mt-12 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
-          <ArrowLeft className="size-4" /> Back to all projects
+          <ArrowLeft className="size-4" /> {t('Back to all projects')}
         </Link>
       </main>
     </div>
