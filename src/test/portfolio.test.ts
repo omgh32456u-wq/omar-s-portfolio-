@@ -13,6 +13,10 @@ import {
   site,
   skills,
   stackLayers,
+  heroMetrics,
+  techSnippets,
+  portfolioLanguages,
+  verifiedBusinessMetrics,
 } from "@/content/site";
 import { routeTree } from "@/routeTree.gen";
 
@@ -62,6 +66,12 @@ describe("skills and support", () => {
 });
 
 describe("project routes", () => {
+  it("counts three featured projects, four core technologies and two site languages without business claims", () => {
+    expect(heroMetrics.map((metric) => metric.value)).toEqual([3, 4, 2]);
+    expect(techSnippets.map((tech) => tech.language)).toEqual(["JavaScript", "Python", "Dart", "Flutter"]);
+    expect(portfolioLanguages).toEqual(["en", "ar"]);
+    expect(verifiedBusinessMetrics).toEqual({});
+  });
   const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
   it.each(projects.map((p) => p.id))("matches /projects/%s", (slug) => {
     expect(router.matchRoutes(`/projects/${slug}`).at(-1)?.routeId).toBe("/projects/$slug");
