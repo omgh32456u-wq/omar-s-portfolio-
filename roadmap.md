@@ -5,3 +5,9 @@
 - [x] Verify navigation, languages, themes, mobile, motion and tests; do not publish.
 - [x] Polish Arabic copy, developer positioning, typography, icons and theme parity.
 - [x] Add professional email and creator credit; preserve Support and verify without publishing.
+- [ ] Use uploaded portraits: photoreal in hero, stylized as compact avatar (header/about).
+- [ ] Replace placeholder socials with supplied links (Snapchat, Instagram, TikTok, WhatsApp, Telegram, phone); social strip near footer; remove fake GitHub/LinkedIn/X.
+- [ ] Add Support to desktop and mobile navigation.
+- [ ] Replace CSS DeviceTeardown with real Three.js scroll-driven exploded laptop (lazy, capped DPR, offscreen pause, mobile/reduced-motion fallback, concept label).
+- [ ] Dedicated light-mode polish across all sections.
+- [ ] Copy audit EN/AR, tests, typecheck/build; verify in browser; do not publish.
