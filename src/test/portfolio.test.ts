@@ -8,7 +8,9 @@ import {
   displayName,
   isSet,
   isValidUrl,
+  nav,
   projects,
+  site,
   skills,
   stackLayers,
 } from "@/content/site";
@@ -29,6 +31,15 @@ describe("placeholder guard", () => {
     expect(contactEmail).not.toBe("you@example.com");
     expect(activeSocials.some((s) => s.href.includes("your-username"))).toBe(false);
     expect(displayName).not.toBe("Your Name");
+  });
+  it("uses only the supplied public social and contact links", () => {
+    expect(activeSocials.map((s) => s.icon).sort()).toEqual(["instagram", "snapchat", "telegram", "tiktok", "whatsapp"]);
+    expect(activeSocials.every((s) => s.href.startsWith("https://"))).toBe(true);
+    expect(site.phoneTel).toBe("tel:+201001246641");
+    expect(site.whatsapp).toBe("https://wa.me/201001246641");
+  });
+  it("includes Support in navigation", () => {
+    expect(nav.some((n) => n.id === "support")).toBe(true);
   });
 });
 
