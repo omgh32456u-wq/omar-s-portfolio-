@@ -33,12 +33,12 @@ describe("support choices", () => {
     render(<SupportSection />);
     const input = screen.getByLabelText("Custom amount");
     fireEvent.change(input, { target: { value: "150" } });
-    fireEvent.click(screen.getByRole("button", { name: "USD", exact: true }));
+    fireEvent.click(screen.getByRole("button", { name: /^USD$/ }));
     expect(input).toHaveValue("");
     fireEvent.change(input, { target: { value: "7" } });
-    fireEvent.click(screen.getByRole("button", { name: "EGP", exact: true }));
+    fireEvent.click(screen.getByRole("button", { name: /^EGP$/ }));
     expect(input).toHaveValue("150");
-    fireEvent.click(screen.getByRole("button", { name: "USD", exact: true }));
+    fireEvent.click(screen.getByRole("button", { name: /^USD$/ }));
     expect(input).toHaveValue("7");
   });
   it("allows switching payment method without initiating a payment", () => {
