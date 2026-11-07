@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ArrowUpRight, Mail, MapPin } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { contactEmail, displayName, projects, site, siteUrl, skills, localizeProject, projectSelection } from "@/content/site";
+import omarPortrait from "@/assets/omar-portrait.png.asset.json";
 import { useLanguage } from "@/components/portfolio/language";
 import { Button } from "@/components/ui/button";
 import { SupportSection } from "@/components/portfolio/support-section";
@@ -67,7 +68,17 @@ function Index() {
             </div>
           </Reveal>
           <Reveal>
-            <HeroDiagram />
+            <div className="relative mx-auto w-full max-w-md pt-28">
+              <img
+                src={omarPortrait.url}
+                alt={t("Portrait of Omar Elhady")}
+                width={1024}
+                height={1024}
+                loading="eager"
+                className="portrait-frame absolute top-0 end-2 w-32 rounded-2xl object-cover sm:w-36"
+              />
+              <HeroDiagram />
+            </div>
           </Reveal>
         </section>
 
@@ -220,8 +231,21 @@ function Index() {
       </main>
 
       <footer className="relative border-t">
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 border-b px-5 py-8">
+          <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">{t("Find me on")}</p>
+          <SocialRow />
+        </div>
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 py-8 text-sm text-muted-foreground sm:flex-row">
-          <div className="flex flex-wrap justify-center gap-x-4 gap-y-1"><p>© {new Date().getFullYear()}</p><p>{t(site.creator)}</p></div>
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+            <p>© {new Date().getFullYear()}</p>
+            <p>{t(site.creator)}</p>
+            <a href={site.phoneTel} dir="ltr" className="inline-flex min-h-11 items-center gap-1.5 hover:text-foreground">
+              <Phone className="size-3.5" aria-hidden="true" /> {site.phoneDisplay}
+            </a>
+            <a href={site.whatsapp} target="_blank" rel="noreferrer noopener" className="inline-flex min-h-11 items-center gap-1.5 hover:text-foreground">
+              {t("Chat on WhatsApp")}
+            </a>
+          </div>
           <a href="#top" className="hover:text-foreground">{t("Back to top ↑")}</a>
         </div>
       </footer>
