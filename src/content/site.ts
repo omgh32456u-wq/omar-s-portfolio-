@@ -14,10 +14,16 @@ export const site = {
   ],
   email: "omar.lhd4dev@gmail.com", // [EDIT] Public professional contact only
   creator: "Creator: Omar Elhady",
+  // Public contact number (tap-to-call + WhatsApp).
+  phoneDisplay: "+20 100 124 6641",
+  phoneTel: "tel:+201001246641",
+  whatsapp: "https://wa.me/201001246641",
   socials: [
-    { label: "GitHub", icon: "github", href: "https://github.com/your-username" }, // [EDIT]
-    { label: "LinkedIn", icon: "linkedin", href: "https://www.linkedin.com/in/your-username" }, // [EDIT]
-    { label: "X", icon: "x", href: "https://x.com/your-username" }, // [EDIT]
+    { label: "TikTok", icon: "tiktok", href: "https://www.tiktok.com/@omar.mohamed.2223?_r=1&_t=ZS-9BCH9a9ouj1" },
+    { label: "WhatsApp", icon: "whatsapp", href: "https://wa.me/201001246641" },
+    { label: "Instagram", icon: "instagram", href: "https://www.instagram.com/omar.lhd?obrf=dDcxZ2k4bWR3bnVs" },
+    { label: "Snapchat", icon: "snapchat", href: "https://www.snapchat.com/add/omar_elhady223?share_id=Jc1Y8SVJUrk&locale=en-US" },
+    { label: "Telegram", icon: "telegram", href: "https://t.me/+201001246641" },
   ] as const,
 };
 
@@ -127,9 +133,12 @@ export const skills = [
 export type StackLayer = { id: string; part: string; label: string; tools: string[]; tone: "primary" | "accent" };
 export const stackLayers: StackLayer[] = [
   { id: "screen", part: "Display", label: "Interface", tools: ["Flutter", "React", "HTML & CSS"], tone: "primary" },
-  { id: "board", part: "Logic board", label: "Languages", tools: ["Dart", "TypeScript", "Python"], tone: "accent" },
-  { id: "chip", part: "Processor", label: "AI workflow", tools: ["Prompt design", "LLM tools"], tone: "primary" },
-  { id: "chassis", part: "Chassis", label: "Foundations", tools: ["Git & GitHub", "Systems design"], tone: "accent" },
+  { id: "deck", part: "Keyboard deck", label: "Interaction", tools: ["Responsive UI", "Cross-platform UI"], tone: "accent" },
+  { id: "board", part: "Logic board", label: "Languages", tools: ["Dart", "TypeScript", "Python"], tone: "primary" },
+  { id: "chip", part: "Processor", label: "AI workflow", tools: ["Prompt design", "LLM tools"], tone: "accent" },
+  { id: "memory", part: "Memory & storage", label: "Data", tools: ["Data modeling", "REST APIs"], tone: "primary" },
+  { id: "battery", part: "Battery", label: "Foundations", tools: ["Git & GitHub", "Systems design"], tone: "accent" },
+  { id: "fan", part: "Cooling", label: "Iteration", tools: ["Rapid prototyping", "Learning in public"], tone: "primary" },
 ];
 
 // ── Support my work ──────────────────────────────────────────
@@ -162,6 +171,7 @@ export const nav = [
   { id: "about", label: "About" },
   { id: "projects", label: "Projects" },
   { id: "skills", label: "Skills" },
+  { id: "support", label: "Support" },
   { id: "contact", label: "Contact" },
 ];
 
