@@ -30,3 +30,4 @@ use the editor.
 <!-- LOVABLE:END -->
 
 - All personal portfolio content (name, bio, email, socials, projects, skills) lives in src/content/site.ts so non-developers edit one file.
+- Keep support currency presets and provider availability in src/content/site.ts, with interaction isolated in SupportSection; verified integrations can replace unavailable providers without redesigning the portfolio.

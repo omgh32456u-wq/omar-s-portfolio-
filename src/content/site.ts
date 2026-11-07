@@ -119,15 +119,28 @@ export const stackLayers: StackLayer[] = [
 // ── Support my work ──────────────────────────────────────────
 // Platforms only render as links once `url` is a real https:// address.
 export const support = {
-  title: "Support my work",
+  title: "Support my journey",
   body:
-    "I'm an independent student developer — building, learning and sharing projects in the open. If something here was useful or interesting, a small contribution helps me keep going. Completely optional, always appreciated.", // [EDIT]
+    "If my work resonates with you, a small contribution helps me keep building and learning. Always optional, always appreciated.", // [EDIT]
+  currencies: {
+    EGP: { presets: [50, 100, 200, 500] },
+    USD: { presets: [1, 3, 5, 10] },
+  },
+  settlementCurrency: "EGP",
+  paymentMethods: [
+    { id: "instapay-meeza", label: "InstaPay / Meeza", kind: "bank", availability: "coming-soon" },
+    { id: "vodafone-cash", label: "Vodafone Cash", kind: "wallet", availability: "coming-soon" },
+  ] as const,
   platforms: [
     { id: "buymeacoffee", label: "Buy Me a Coffee", url: "" }, // [EDIT] e.g. https://buymeacoffee.com/yourname
   ],
 };
 export const isValidUrl = (u: string) => /^https:\/\/[^\s/$.?#].[^\s]*$/i.test(u) && isSet(u);
 export const activeSupportPlatforms = support.platforms.filter((p) => isValidUrl(p.url));
+
+export type SupportCurrency = keyof typeof support.currencies;
+export const isValidSupportAmount = (value: string) =>
+  /^\d+(\.\d{1,2})?$/.test(value) && Number.isFinite(Number(value)) && Number(value) > 0;
 
 export const nav = [
   { id: "about", label: "About" },
