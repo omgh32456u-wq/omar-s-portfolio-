@@ -8,9 +8,9 @@ import { DeviceTeardown } from "@/components/portfolio/device-teardown";
 import { Header, Reveal, SectionHeading, SocialRow } from "@/components/portfolio/parts";
 import { HeroDiagram, ProjectVisual } from "@/components/portfolio/visuals";
 
-const title = `${displayName} — Student, Developer & AI Builder`;
+const title = `${displayName} — Student Developer`;
 const description =
-  "Portfolio of a student, developer and AI builder from Egypt. Projects in progress: Mizano, KingdomForge and Nafas.";
+  "Omar Elhady, a student developer from Egypt learning programming and building software. Explore Mizano, KingdomForge and Nafas, all works in progress.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -49,7 +49,7 @@ function Index() {
             <h1 className="text-4xl font-semibold leading-[1.05] sm:text-5xl">
               {site.roles.map((r, i) => (
                 <span key={r} className="block">
-                  {i === 2 ? <span className="text-gradient">{t(r)}.</span> : `${t(r)}.`}
+                  <span className="text-gradient">{t(r)}</span>
                 </span>
               ))}
             </h1>
@@ -85,7 +85,7 @@ function Index() {
                 {[
                   ["role", site.roles.map(t).join(" · ")],
                   ["based", t(site.location)],
-                  ["focus", "Apps, games, AI workflows"],
+                  ["focus", "Apps, games & product thinking"],
                   ["now", "Building Mizano, KingdomForge & Nafas"],
                 ].map(([k, v]) => (
                   <li key={k} className="flex justify-between gap-4 border-b pb-3 last:border-0 last:pb-0">
@@ -128,7 +128,7 @@ function Index() {
                     <ul className="mt-2 grid gap-1.5 text-sm sm:grid-cols-2">
                       {p.planned.map((f) => (
                         <li key={f} className="flex gap-2">
-                          <span className="text-primary">→</span> {f}
+                          <ArrowRight aria-hidden="true" className="directional-icon mt-0.5 size-4 shrink-0 text-primary" /> {f}
                         </li>
                       ))}
                     </ul>
@@ -195,15 +195,18 @@ function Index() {
             <div className="glass relative overflow-hidden rounded-3xl p-8 text-center sm:p-14">
               <div className="bg-ambient pointer-events-none absolute inset-0" />
               <div className="relative">
-                <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-primary">05 // {t("Contact")}</p>
+                <p className="mb-3 inline-flex items-center gap-2 font-mono text-xs uppercase text-primary"><Mail className="size-4" aria-hidden="true" /> {t("Contact")}</p>
                 <h2 className="text-3xl font-semibold sm:text-5xl">{t("Let's build something.")}</h2>
                 <p className="mx-auto mt-4 max-w-md text-muted-foreground">
                   {t("Questions, feedback on a project, or an idea to collaborate on — my inbox is open.")}
                 </p>
                 {contactEmail ? (
-                  <a href={`mailto:${contactEmail}`} className={`${btn} mt-8 bg-gradient-brand text-primary-foreground hover:-translate-y-0.5`}>
-                    <Mail className="size-4" /> {contactEmail} <ArrowUpRight className="size-4" />
-                  </a>
+                  <div className="mt-8">
+                    <p className="mb-3 text-sm text-muted-foreground">{t("Email me")}</p>
+                    <Button asChild className={`${btn} contact-email bg-primary text-primary-foreground hover:bg-primary/90`}>
+                      <a href={`mailto:${contactEmail}`} dir="ltr"><Mail className="size-4 shrink-0" /> <span>{contactEmail}</span> <ArrowUpRight className="size-4 shrink-0" /></a>
+                    </Button>
+                  </div>
                 ) : (
                   <p className="mt-8 font-mono text-sm text-muted-foreground">{t("Contact details coming soon.")}</p>
                 )}
@@ -218,7 +221,7 @@ function Index() {
 
       <footer className="relative border-t">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 py-8 text-sm text-muted-foreground sm:flex-row">
-          <p>© {new Date().getFullYear()} {t(displayName)}</p>
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-1"><p>© {new Date().getFullYear()}</p><p>{t(site.creator)}</p></div>
           <a href="#top" className="hover:text-foreground">{t("Back to top ↑")}</a>
         </div>
       </footer>

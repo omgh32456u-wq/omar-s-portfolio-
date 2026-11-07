@@ -1,8 +1,15 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Menu, Moon, Sun, X } from "lucide-react";
+import { Menu, Moon, Sun, X, UserRound, FolderCode, Code2, Mail, Layers, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "./language";
 import { activeSocials, displayInitials, displayName, nav } from "@/content/site";
+
+const sectionIcons: Record<string, LucideIcon> = { about: UserRound, projects: FolderCode, skills: Code2, contact: Mail, stack: Layers };
+
+function SectionIcon({ id }: { id: string }) {
+  const Icon = sectionIcons[id] ?? Code2;
+  return <Icon className="size-4 shrink-0" aria-hidden="true" />;
+}
 
 export function Reveal({ children, className = "" }: { children: ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -133,9 +140,9 @@ export function Header() {
             <li key={n.id}>
               <a
                 href={`/#${n.id}`}
-                className="rounded-full px-4 py-2 text-sm text-muted-foreground transition hover:bg-surface hover:text-foreground"
+                className="inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm text-muted-foreground transition hover:bg-surface hover:text-foreground"
               >
-                {t(n.label)}
+                <SectionIcon id={n.id} /> {t(n.label)}
               </a>
             </li>
           ))}
@@ -166,9 +173,9 @@ export function Header() {
                 <a
                   href={`/#${n.id}`}
                   onClick={() => setOpen(false)}
-                  className="block border-b py-4 font-display text-lg"
+                  className="flex items-center gap-3 border-b py-4 font-display text-lg"
                 >
-                  {t(n.label)}
+                  <SectionIcon id={n.id} /> {t(n.label)}
                 </a>
               </li>
             ))}
@@ -186,8 +193,8 @@ export function SectionHeading({ index, kicker, title }: { index: string; kicker
   const { t } = useLanguage();
   return (
     <div className="mb-12">
-      <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-primary">
-        <span className="text-muted-foreground">{index} //</span> {t(kicker)}
+      <p className="mb-3 flex items-center gap-2 font-mono text-xs uppercase text-primary">
+        <SectionIcon id={({ "01": "about", "02": "projects", "03": "skills", "04": "stack" })[index] ?? "skills"} /> {t(kicker)}
       </p>
       <h2 className="text-3xl font-semibold sm:text-4xl">{t(title)}</h2>
     </div>

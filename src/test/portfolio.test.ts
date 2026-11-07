@@ -15,6 +15,9 @@ import {
 import { routeTree } from "@/routeTree.gen";
 
 describe("placeholder guard", () => {
+  it("uses the authorized professional email as the public contact channel", () => {
+    expect(contactEmail).toBe("omar.lhd4dev@gmail.com");
+  });
   it("treats template placeholders as unset", () => {
     expect(isSet("you@example.com")).toBe(false);
     expect(isSet("Your Name")).toBe(false);
