@@ -1,8 +1,8 @@
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ComponentType } from "react";
 import { useLanguage } from "./language";
 import { stackLayers } from "@/content/site";
 
-const LaptopScene = lazy(() => import("./laptop-scene"));
+type SceneProps = { progressRef: { current: number }; visible: boolean; onReady: () => void };
 
 /**
  * Scroll-driven 3D exploded laptop (artistic concept model, not real hardware).
@@ -14,6 +14,7 @@ export function DeviceTeardown() {
   const rootRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef(0);
   const [use3D, setUse3D] = useState(false);
+  const [Scene, setScene] = useState<ComponentType<SceneProps> | null>(null);
   const [visible, setVisible] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -23,6 +24,19 @@ export function DeviceTeardown() {
     setUse3D(!reduced && !mobile);
     setOpen(reduced || mobile);
   }, []);
+
+  // Dynamic import without Suspense: a suspense boundary around <Canvas>
+  // triggers React 19 "synchronously unmount a root" errors when it resolves.
+  useEffect(() => {
+    if (!use3D) return;
+    let cancelled = false;
+    import("./laptop-scene").then((m) => {
+      if (!cancelled) setScene(() => m.default);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [use3D]);
 
   useEffect(() => {
     const el = rootRef.current;
@@ -57,13 +71,15 @@ export function DeviceTeardown() {
         {use3D ? (
           <figure className="relative">
             <div className="laptop-canvas relative h-[24rem] w-full sm:h-[27rem]" aria-hidden="true">
-              <Suspense fallback={<div className="grid size-full place-items-center font-mono text-xs text-muted-foreground">…</div>}>
-                <LaptopScene
+              {Scene ? (
+                <Scene
                   progressRef={progressRef}
                   visible={visible}
                   onReady={() => rootRef.current?.setAttribute("data-scene-ready", "true")}
                 />
-              </Suspense>
+              ) : (
+                <div className="grid size-full place-items-center font-mono text-xs text-muted-foreground">…</div>
+              )}
             </div>
             <figcaption className="mt-2 text-center text-[10px] text-muted-foreground">
               {t("Artistic concept model · not real hardware")} · {t("Scroll to disassemble")}
