@@ -33,3 +33,4 @@ use the editor.
 - Keep support currency presets and provider availability in src/content/site.ts, with interaction isolated in SupportSection; verified integrations can replace unavailable providers without redesigning the portfolio.
 - Keep bilingual copy and project localization in src/content/site.ts; a shared LanguageProvider owns persistence and document direction so all routes switch together.
 - Use ProjectVisual for shared illustrative previews on cards and detail pages; preview labels must distinguish concepts from shipped products.
+- Mirror only directional navigation icons in RTL; preserve brand, utility and LTR code icons so language switching keeps their meaning.

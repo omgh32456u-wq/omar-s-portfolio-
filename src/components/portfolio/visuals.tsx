@@ -16,7 +16,7 @@ export function HeroDiagram() {
           <p><span className="text-accent">const</span> me = {"{"}</p>
           <p className="ps-5">student: <span className="text-primary">true</span>,</p>
           <p className="ps-5">builds: <span className="text-primary">"software"</span>,</p>
-          <p className="ps-5">with: <span className="text-primary">"AI"</span>,</p>
+          <p className="ps-5">focus: <span className="text-primary">"solve problems"</span>,</p>
           <p className="ps-5">mindset: <span className="text-primary">"keep learning"</span></p>
           <p>{"};"}<span className="code-cursor" aria-hidden>▎</span></p>
         </div>

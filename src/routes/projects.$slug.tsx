@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import type { ReactNode } from "react";
 import { displayName, getProject, isSet, siteUrl, localizeProject } from "@/content/site";
 import { useLanguage } from "@/components/portfolio/language";
@@ -117,7 +117,7 @@ function ProjectPage() {
           <Section title="Intended scope">
             <ul className="grid gap-2 sm:grid-cols-2">
               {p.planned.map((f) => (
-                <li key={f} className="flex gap-2"><span className="text-primary">→</span> {f}</li>
+                <li key={f} className="flex gap-2"><ArrowRight aria-hidden="true" className="directional-icon mt-0.5 size-4 shrink-0 text-primary" /> {f}</li>
               ))}
             </ul>
             <p className="mt-5 rounded-lg border border-dashed px-3 py-2 text-sm text-muted-foreground">{p.notYet}</p>
